@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 
 //simple form
 // name
@@ -16,16 +16,29 @@ const Register = () => {
   });
 
   const onChange = (e) => {
+    countRef.current++;
+    console.log(countRef.current);
     setInput({
       ...input,
       [e.target.name]: e.target.value,
     });
   };
 
+  const onSubmit = () => {
+    if (input.name === '') {
+      // focus on dom where name is
+      // console.log(inputRef.current);
+      inputRef.current.focus();
+    }
+  };
+
+  const countRef = useRef(0);
+  const inputRef = useRef();
+
   return (
       <>
         <div>
-          <input name="name" value={input.name} onChange={onChange} placeholder={'name'}></input>
+          <input ref={inputRef} name="name" value={input.name} onChange={onChange} placeholder={'name'}></input>
         </div>
         <div>
           <input name="birth" value={input.birth} onChange={onChange} type="date"/>
@@ -44,6 +57,7 @@ const Register = () => {
         <div>
           <textarea name="bio" value={input.bio} onChange={onChange}></textarea>
         </div>
+        <button onClick={onSubmit}>submit</button>
       </>
   );
 };
