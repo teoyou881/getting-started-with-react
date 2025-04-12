@@ -21,7 +21,7 @@ export default function Main() {
   };
 
   const buttonProps = {
-    text: 'logout',
+    text: 'mail',
     color: 'red',
     a: 1,
     b: 2,
